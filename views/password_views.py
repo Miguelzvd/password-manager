@@ -61,11 +61,7 @@ class FernetHasher:
     def decrypt(self, value):
         if not isinstance(value, bytes):
             value = value.encode()
-        try: 
+        try:
             return self.fernet.decrypt(value).decode()
-        except InvalidToken as e:
-            return 'Token inválido'
-
-
-fernet_caio = FernetHasher('+3RAv/RrEa/M7qYOR6tHjel4kJl18Kc4M3lFmuyssDk=')
-print(fernet_caio.decrypt('gAAAAABnJCpxRP6CpdoYEW1THqP9rCgpl2f3PulmTn6HMUHO1CViJG3ZBaZuhXC6WJX9qDhk_gEaWzEH98sJP_AabEcqJJhMJQ=='))
+        except InvalidToken:
+            return "Token inválido"
